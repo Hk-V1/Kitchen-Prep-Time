@@ -1,4 +1,4 @@
-# 🍽️ KPT Prediction — ASIF + KSAL Combined Solution
+# 🍽️ KPT Prediction - ASIF + KSAL Combined Solution
 
 ### Hackathon Submission: Kitchen Prep Time Prediction via Signal Redesign, De-noising, Live Rush Detection & Capacity-Aware Forecasting
 
@@ -6,7 +6,7 @@
 
 ## Problem Statement
 
-Food delivery platforms lose revenue and customer trust because Kitchen Prep Time (KPT) forecasts are inaccurate. The root cause is not a weak ML model — it is **corrupted input signals**:
+Food delivery platforms lose revenue and customer trust because Kitchen Prep Time (KPT) forecasts are inaccurate. The root cause is not a weak ML model - it is **corrupted input signals**:
 
 - Merchant-marked FOR (Food Order Ready) signals are noisy and biased
 - No real-time visibility into kitchen load (dine-in, concurrent batches, competitor orders)
@@ -127,7 +127,7 @@ python generate_architecture_diagram.py
 
 ---
 
-## KSAL — Signal Augmentation Details
+## KSAL - Signal Augmentation Details
 
 KSAL replaces noisy merchant-marked FOR timestamps with four real signals:
 
@@ -145,13 +145,13 @@ KSAL replaces noisy merchant-marked FOR timestamps with four real signals:
 
 ---
 
-## 🔬 ASIF — Signal Engineering Details
+## ASIF - Signal Engineering Details
 
 ### `signal_engine.py`
 
 | Function | Description |
 |----------|-------------|
-| `smooth_signal(signal, alpha)` | EWMA de-noising — lower lag than simple MA, better for real-time dispatch |
+| `smooth_signal(signal, alpha)` | EWMA de-noising - lower lag than simple MA, better for real-time dispatch |
 | `rolling_variance(signal, window)` | Kitchen instability quantification over rolling window |
 | `detect_anomalies(signal, threshold)` | Rolling Z-score flags rush spikes before they corrupt training labels |
 | `compute_live_rush_index(data)` | Composite LRI [0–1]: 45% prep deviation + 30% queue depth + 25% spike rate |
@@ -162,14 +162,14 @@ KSAL replaces noisy merchant-marked FOR timestamps with four real signals:
 | Function | What It Measures |
 |----------|----------------|
 | `mae(y_true, y_pred)` | Mean Absolute Error (minutes) |
-| `rmse(y_true, y_pred)` | Root Mean Squared Error — penalises large rush-period errors |
+| `rmse(y_true, y_pred)` | Root Mean Squared Error - penalises large rush-period errors |
 | `sla_percentage(...)` | % orders predicted within ±5 min |
 | `rider_idle_proxy(...)` | Avg minutes rider waits at restaurant |
 | `cancellation_proxy(...)` | % orders where over-prediction exceeds 8 min (cancellation risk) |
 
 ---
 
-## 📊 Results
+## Results
 
 | Scenario | MAE (min) | RMSE (min) | SLA % | Rider Idle | Cancel Rate |
 |----------|-----------|------------|-------|------------|-------------|
