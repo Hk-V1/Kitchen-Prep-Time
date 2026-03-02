@@ -1,0 +1,4 @@
+label,MAE,RMSE,SLA_%,Rider_Idle_min,Cancellation_%
+1. Baseline (noisy FOR),3.189,4.0,79.043,0.585,2.899
+2. ML-Only (raw features),1.801,2.256,97.34,0.234,0.032
+3. ASIF System,3.322,3.889,79.026,0.009,1.695
